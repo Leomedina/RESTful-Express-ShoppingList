@@ -14,6 +14,7 @@ class Items {
             'price': price,
         };
         this.items.push(newItem);
+        return newItem;
     }
 
     getAllItems() {
@@ -24,13 +25,14 @@ class Items {
     }
 
     removeItem(name) {
+        let response = false;
         this.items.forEach((item, index) => {
-            if (this.item.name === name) {
+            if (item.name === name) {
                 this.items.splice(index, 1);
-                return true;
+                response = true;
             };
         });
-        return false;
+        return response;
     };
 
     getItem(name) {
@@ -45,7 +47,7 @@ class Items {
 
     convertStringToNumber(string) {
         let valToNum = Number(string);
-        
+
         if (Number.isNaN(valToNum)) {
             return null;
         } else {
@@ -66,11 +68,18 @@ class Items {
 
         return updatedItem;
     }
+
+    reset() {
+        //mutates rather than redefine
+        this.items.length = 0;
+    }
 }
 
 const items = new Items();
+const testItems = new Items()
 items.addItem('Mango', 3.75)
 items.addItem('Lango', 4.50)
 items.addItem('fango', 50)
+items.addItem('lagno', 40)
 
-module.exports = items;
+module.exports = items, testItems;
